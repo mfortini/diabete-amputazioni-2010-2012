@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Numero di beni confiscati alle mafie per Provincia</title>
+	<title>Incidenza delle amputazioni per diabete sulla popolazione 18+ per Provincia</title>
 
 	<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
@@ -41,9 +41,9 @@
 <body>
 	<div id="map"></div>
 
-	<script type="text/javascript" src="./province_beni_tipo.js"></script>
-	<script>
+	<script type="text/javascript" src="./assoluto_province_2012.js"></script>
 
+<script>
 	var map = L.map('map').setView([41.91, 12.832], 6);
 
 	// var realvista = L.tileLayer.wms("http://213.215.135.196/reflector/open/service?", {
@@ -67,34 +67,30 @@
 	};
 
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>Beni immobili confiscati</h4>' +  (props ?
-			'<b> Provincia: </b>' + props.NOME_PRO + '<br />' + 
-			'<b> Numero totale: </b>' + props.totale + '<br />' + 
-			'<b> Abitazioni: </b>' + props.Abitazione + '<br />' +
-			'<b> Altri beni: </b>' + props.Altri_beni + '<br />' +
-			'<b> Capannoni: </b>' + props.Capannone + '<br />' +
-			'<b> Fabbricati: </b>' + props.Fabbricato + '<br />' +
-			'<b> Locale: </b>' + props.Locale + '<br />' +
-			'<b> Terreni: </b>' + props.Terreno + '<br />' 
+		this._div.innerHTML = '<h4>Amputazioni dovute al diabete</h4>' +  (props ?
+			'<b> Provincia: </b>' + props.PROVINCIA + '<br />' + 
+			'<b> Popolazione 18+: </b>' + props.POP18p + '<br />' + 
+			'<b> Amputati: </b>' + props.N_Amputazioni + '<br />' +
+			'<b> Incidenza amputati su popolazione 18+ (su 1000 unità): </b>' + props.incidenza_su_pop18p + '<br />' 
 			: 'Mouse su un poligono');
 	};
 
 	info.addTo(map);
 
 	function getColor(d) {
-		return d > 1102 ? '#BD0026' :
-		d > 608  ? '#DA2122' :
-		d > 361  ? '#F14624' :
-		d > 261  ? '#F97534' :
-		d > 153   ? '#FD9F45' :
-		d > 89   ? '#FDC357' :
-		d > 28   ? '#FEE180' :
+		return d > 0.31 ? '#BD0026' :
+		d > .23  ? '#DA2122' :
+		d > .1860  ? '#F14624' :
+		d > .15  ? '#F97534' :
+		d > .12  ? '#FD9F45' :
+		d > .09   ? '#FDC357' :
+		d > .04   ? '#FEE180' :
 		'#FFFFB2';
 	}
 
 	function style(feature) {
 		return {
-			fillColor: getColor(feature.properties.totale),
+			fillColor: getColor(feature.properties.incidenza_su_pop18p),
 			weight: 0.3,
 			opacity: 1,
 			color: 'white',
@@ -138,7 +134,7 @@
 		});
 	}
 
-	geojson = L.geoJson(Beni_Province, {
+	geojson = L.geoJson(assoluto_province_2012, {
 		style: style,
 		onEachFeature: onEachFeature
 	}).addTo(map);
@@ -153,7 +149,7 @@
 
 
 		var div = L.DomUtil.create('div', 'info legend'),
-		grades = [1, 28, 89, 153, 261, 361, 608, 1101],
+		grades = [0, 0.04, 0.09, 0.12, 0.15, 0.186, 0.23, 0.31],
 		labels = [],
 		from, to;
 
