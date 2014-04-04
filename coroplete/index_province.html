@@ -78,11 +78,11 @@
 	};
 
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>Amputazioni dovute al diabete</h4>' +  (props ?
-			'<b> Provincia: </b>' + props.PROVINCIA + '<br />' + 
-			'<b> Popolazione 18+: </b>' + props.POP18p + '<br />' + 
-			'<b> Amputati: </b>' + props.N_Amputazioni + '<br />' +
-			'<b> Incidenza amputati su popolazione 18+ (su 1000 unità): </b>' + props.incidenza_su_pop18p + '<br />' 
+                this._div.innerHTML = '<h4>Amputazioni dovute al diabete nel 2012</h4><table border="1" cellpadding="0" cellspacing="0" width=500>' +  (props ?
+                                '<tr><td width="70%"><b> Provincia: </b></td><td style="text-align: left; margin-left: 1em;"><b>' + props.PROVINCIA + '</b></td></tr>' + 
+                                '<tr><td width="70%"><b> Popolazione 18+: </b></td><td style="text-align: right; margin-right: 1em;">' + props.POP18p + '</td></tr>' + 
+                                '<tr><td width="70%"><b> Amputati: </b></td><td style="text-align: right; margin-right: 1em;">' + props.N_Amputazioni + '</td></tr>' +
+                                '<tr><td width="70%"><b> Incidenza amputati su popolazione 18+<br />(su 1000 unità): </b></td><td style="text-align: right; margin-right: 1em;">' + props.incidenza_su_pop18p + '</td></tr>' 
 			: 'Mouse su un poligono');
 	};
 
@@ -173,7 +173,7 @@
 				from + (to ? '&ndash;' + to : '+'));
 		}
 
-		div.innerHTML = labels.join('<br>');
+                div.innerHTML = "Incidenza<br/>" + labels.join('<br/>');
 		return div;
 	};
 
