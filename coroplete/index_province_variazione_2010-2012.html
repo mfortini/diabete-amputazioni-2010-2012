@@ -79,8 +79,8 @@
 
 	info.update = function (props) {
                 this._div.innerHTML = '<h4>Variazione amputazioni dovute al diabete 2010&ndash;2012</h4><table border="1" cellpadding="0" cellspacing="0" width=500>' +  (props ?
-                                '<tr><td width="65%"><b> Provincia: </b></td><td style="text-align: left; margin-left: 1em;"><b>' + props['dati_diabete_52 - VARProvince 2012_PROVINCIA'] + '</b></td></tr>' + 
-                                '<tr><td width="65%"><b> Variazione relativa 2010-2012: </b></td><td style="text-align: right; margin-right: 1em;">' + props['dati_diabete_52 - VARProvince 2012_NUMERO AMPUTAZIONI'] + '</td></tr>' + 
+                                '<tr><td width="65%"><b> Provincia: </b></td><td style="text-align: left; margin-left: 1em;"><b>' + props.Provincia + '</b></td></tr>' + 
+                                '<tr><td width="65%"><b> Variazione relativa 2010-2012: </b></td><td style="text-align: right; margin-right: 1em;">' + props.N_amputazioni + '</td></tr>' + 
 			'' : 'Mouse su un poligono');
 	};
 
@@ -106,11 +106,11 @@
 
 	function style(feature) {
 		return {
-			fillColor: getColor(feature.properties['dati_diabete_52 - VARProvince 2012_NUMERO AMPUTAZIONI']),
+			fillColor: getColor(feature.properties.N_amputazioni),
 			weight: 0.3,
 			opacity: 1,
 			color: 'white',
-			fillOpacity: 0.7
+			fillOpacity: 0.8
 		};
 	}
 
@@ -121,7 +121,7 @@
 			weight: 0.5,
 			color: '#666',
 			dashArray: '',
-			fillOpacity: 0.7
+			fillOpacity: 0.8
 		});
 
 		if (!L.Browser.ie && !L.Browser.opera) {
