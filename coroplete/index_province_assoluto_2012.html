@@ -65,17 +65,11 @@
 <script>
 	var map = L.map('map').setView([41.91, 12.832], 6);
 
-	// var realvista = L.tileLayer.wms("http://213.215.135.196/reflector/open/service?", {
-	// 	layers: 'rv1',
-	// 	format: 'image/jpeg',
-	// 	attribution: "RealVista1.0 WMS OPEN di e-GEOS SpA - CC BY SA"
-	// }).addTo(map);
+        var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+	var osmAttrib='Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors';
+	var osm = new L.TileLayer(osmUrl, {minZoom: 6, maxZoom: 10, attribution: osmAttrib});
 
-
-
-	var layer = L.tileLayer('http://{s}.acetate.geoiq.com/tiles/acetate/{z}/{x}/{y}.png',{
-		attribution: 'Acetate tileset from GeoIQ',
-	}).addTo(map);
+        osm.addTo(map);
 
 	var info = L.control();
 
